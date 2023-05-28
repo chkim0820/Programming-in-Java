@@ -1,0 +1,19 @@
+/**
+ * A class containing all the test codes for CSDS 132 project #3.
+ * @author Chaehyeon Kim
+ */
+import org.junit.*;
+import static org.junit.Assert.*;
+
+public class HW3Tester {
+  
+  /* a testing method for alphabeticalOrder method in HW2 */
+  /*@Test
+  public void testAlphabeticalOrder() {
+    
+    // Testing an empty string ("0" letters) as an input
+    assertTrue("The test for an empty string fails", HW2.alphabeticalOrder(""));
+    
+  }*/
+  
+}

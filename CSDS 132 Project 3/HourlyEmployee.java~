@@ -1,0 +1,12 @@
+public class HourlyEmployee extends HourlyWorkers implements Employee {
+  
+  public HourlyEmployee(String firstName, String lastName, String number, double hourlyRate) {
+    super(firstName, lastName, number, hourlyRate);
+  }
+  
+  @Override
+  public String toString() {
+    return getNumber() + ": " + getLastName() + ", " + getFirstName() + ", " + "Hourly Employee";
+  }
+  
+}

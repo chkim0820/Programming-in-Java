@@ -1,0 +1,12 @@
+public class SalariedSupervisor extends SalaryWorkers implements Supervisor {
+  
+  public SalariedSupervisor(String firstName, String lastName, String number, double salary) {
+    super(firstName, lastName, number, salary);
+  }
+  
+  @Override
+  public String toString() {
+    return getNumber() + ": " + getLastName() + ", " + getFirstName() + ", " + "Salaried Supervisor";
+  }
+  
+}

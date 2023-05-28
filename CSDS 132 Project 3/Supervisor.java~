@@ -1,0 +1,27 @@
+public interface Supervisor {
+  
+  public abstract String getFirstName();
+  
+  public abstract String getLastName();
+  
+  public abstract String getNumber();
+  
+  public abstract double getAmountEarned();
+  
+  default int compareToByName(Supervisor s) {
+    if (this.getFirstName().equals(s.getFirstName()) 
+         && this.getLastName().equals(s.getLastName()))
+      return 0;
+    else
+      return (this.getFirstName().compareToIgnoreCase(s.getFirstName()));
+  }
+  
+  default int compareToByEarnings(Supervisor s) {
+    if (this.getAmountEarned() < s.getAmountEarned())
+      return -1;
+    else if(this.getAmountEarned() > s.getAmountEarned())
+      return 1;
+    else
+      return 0;
+  }
+}

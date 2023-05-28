@@ -1,0 +1,11 @@
+public class SalesEmployee extends SalesWorkers implements Employee {
+  
+  public SalesEmployee(String firstName, String lastName, String number, double salary, double commission) {
+    super(firstName, lastName, number, salary, commission);
+  }
+  
+  @Override
+  public String toString() {
+    return getNumber() + ": " + getLastName() + ", " + getFirstName() + ", " + "Sales Employee";
+  }
+}

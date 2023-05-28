@@ -1,0 +1,37 @@
+public abstract class HourlyWorkers extends AllWorkers{
+  
+  private double hourlyRate = 0.0;
+  private double hoursWorked = 0.0;
+  
+  public HourlyWorkers(String firstName, String lastName, String number, double hourlyRate) {
+    super(firstName, lastName, number);
+    this.hourlyRate = hourlyRate;
+  }
+  
+  public double getHourlyRate() {
+    return hourlyRate;
+  }
+  
+  public void setHourlyRate(double rate) {
+    this.hourlyRate = rate;
+  }
+  
+  public double getHoursWorked() {
+    return hoursWorked;
+  }
+  
+  public void setHoursWorked(double hoursWorked) {
+    this.hoursWorked = hoursWorked;
+  }
+  
+  public double getAmountEarned() {
+    return (getHourlyRate() * getHoursWorked()) + getBonus();
+  }
+  
+  public void adjustPay(double percentage) {
+    setHourlyRate(getHourlyRate() + getHourlyRate() * (percentage/100));
+  }
+  
+  
+    
+}

@@ -1,0 +1,12 @@
+public class SalesSupervisor extends SalesWorkers implements Supervisor {
+  
+  public SalesSupervisor(String firstName, String lastName, String number, double salary, double commission) {
+    super(firstName, lastName, number, salary, commission);
+  }
+  
+  @Override
+  public String toString() {
+    return getNumber() + ": " + getLastName() + ", " + getFirstName() + ", " + "Sales Supervisor";
+  }
+  
+}

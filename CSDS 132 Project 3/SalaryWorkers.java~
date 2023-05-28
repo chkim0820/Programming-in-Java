@@ -1,0 +1,28 @@
+public abstract class SalaryWorkers extends AllWorkers{
+  
+  private double salary;
+  
+  public SalaryWorkers(String firstName, String lastName, String number, double salary) {
+    super(firstName, lastName, number);
+    this.salary = salary;
+  }
+  
+  public double getSalary() {
+    return salary;
+  }
+  
+  public void setSalary(double salary) {
+    this.salary = salary;
+  }  
+  
+  public double getAmountEarned() {
+    return getSalary() + getBonus();
+  }
+  
+  public void adjustPay(double percentage) {
+    setSalary(getSalary() + (getSalary() * percentage/100));
+  }
+  
+   
+  
+}

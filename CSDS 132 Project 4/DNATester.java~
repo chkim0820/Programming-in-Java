@@ -1,0 +1,148 @@
+/**
+ * A class containing all the test codes for CSDS 132 project #4.
+ * @author Chaehyeon Kim
+ */
+import org.junit.*;
+import static org.junit.Assert.*;
+import java.util.NoSuchElementException;
+
+public class DNATester {
+
+    /**
+     * Tests overridden toString method of DNA class
+     */
+    @Test
+    public void testToString() {
+        /* test inputting no letter */
+        assertEquals("The test for toString() method fails when the input String is null", new String(""), DNA.string2DNA(""));
+        /* test inputting a single letter */
+        assertEquals("The test for toString() method fails when the input String has one letter", new String("A"), DNA.string2DNA("A"));
+        /* test inputting multiple letters */
+        assertEquals("The test for toString() method fails when the input String has many letters", new String("AGCT"), DNA.string2DNA("AGCT"));
+    }
+
+    /**
+     * Tests string2DNA method of DNA class
+     */
+    @Test
+    public void testString2DNA() {
+        /* test inputting no letter */
+        assertEquals("The test for string2DNA() method fails when the input String is null", new DNA(), DNA.string2DNA(""));
+        /* test inputting single letter */
+        assertEquals("The test for string2DNA() method fails when the input String has one letter", new DNA(), DNA.string2DNA("A"));
+        /* test inputting multiple letters */
+        assertEquals("The test for string2DNA() method fails when the input String has many letters", new DNA(), DNA.string2DNA("AGCT"));
+    }
+
+    /**
+     * Tests splice method of DNA class
+     */
+    @Test
+    public void testSplice() {
+        DNA dna1 = new DNA();
+        DNA dna2 = new DNA();
+        dna1.string2DNA("ATGCCT");
+        dna2.string2DNA("GACAGT");
+
+        /* Test removing no base */
+        dna1.splice(dna2, 0);
+        assertEquals("Test for splice() method fails when removing no base", new String("ATGCCTGACAGT"), dna1.toString());
+
+        /* Test removing one base */
+        dna1.string2DNA("ATGCCT");
+        dna2.string2DNA("GACAGT");
+        dna1.splice(dna2, 1);
+        assertEquals("Test for splice() method fails when removing one base", new String("ATGCCTACAGT"), dna1.toString());
+
+        /* Test removing multiple bases */
+        dna1.string2DNA("ATGCCT");
+        dna2.string2DNA("GACAGT");
+        dna1.splice(dna2, 3);
+        assertEquals("Test for splice() method fails when removing one base", new String("ATGCCTAGT"), dna1.toString());
+
+        /* Test when the input DNA has fewer than numbases bases */
+        dna1.string2DNA("ATGCCT");
+        dna2.string2DNA("GACAGT");
+        assertEquals("Test for splice() method fails when input DNA has fewer bases than numbases", new String("ATGCCT"), dna1.toString());
+    }
+
+    /**
+     * Tests overlaps method of DNA class
+     */
+    @Test
+    public void testOverlaps() {
+        DNA dna1 = new DNA();
+        DNA dna2 = new DNA();
+
+        /* Tests 0 overlap (both true & false) */
+        dna1.string2DNA("ATGCCT");
+        dna2.string2DNA("GACAGT");
+        assertEquals("Test for overlaps() with zero overlap falsely returns true", false, DNA.overlaps(dna1, dna2, 0));
+
+        /* Tests 1 overlap (both true & false) */
+        dna1.string2DNA("ATGCCT");
+        dna2.string2DNA("TACAGT");
+        assertEquals("Test for overlaps() with one overlap falsely returns false", true, DNA.overlaps(dna1, dna2, 1));
+        assertEquals("Test for overlaps() with zero overlap falsely returns true", false, DNA.overlaps(dna2, dna1, 1));
+
+        /* Tests many overlaps (both true & false) */
+        dna1.string2DNA("ATGCCC");
+        dna2.string2DNA("CCCAGT");
+        assertEquals("Test for overlaps() with many overlap falsely returns false", true, DNA.overlaps(dna1, dna2, 3));
+        assertEquals("Test for overlaps() with zero overlap falsely returns true", false, DNA.overlaps(dna2, dna1, 3));
+    }
+
+    /**
+     * Tests compareTo method of DNA class
+     */
+    @Test
+    public void testCompareTo() {
+        DNA dna1 = new DNA();
+        DNA dna2 = new DNA();
+
+        /* Compare DNA's with different lengths */
+        dna1.string2DNA("AGCT");
+        dna2.string2DNA("AG");
+        assertEquals("", 1, dna1.compareTo(dna2));
+        assertEquals("", -1, dna2.compareTo(dna1));
+
+        /* compare DNA's with same length and same content */
+        dna1.string2DNA("ACGT");
+        dna2.string2DNA("ACGT");
+        assertEquals("", 0, dna1.compareTo(dna2));
+        assertEquals("", 0, dna2.compareTo(dna1));
+
+        /* compare DNA's with same length and different content */
+        dna1.string2DNA("AGTT");
+        dna2.string2DNA("ACGT");
+        assertEquals("", -1, dna1.compareTo(dna2));
+        assertEquals("", 1, dna2.compareTo(dna1));
+    }
+
+    /**
+     * Tests compareByLength method of DNA class
+     */
+    @Test
+    public void testCompareByLength() {
+        DNA dna1 = new DNA();
+        DNA dna2 = new DNA();
+
+        /* Compare DNA's with different lengths */
+        dna1.string2DNA("AGCT");
+        dna2.string2DNA("AG");
+        assertEquals("", 1, DNA.compareByLength());
+        assertEquals("", -1, DNA.compareByLength());
+
+        /* compare DNA's with same length and same content */
+        dna1.string2DNA("ACGT");
+        dna2.string2DNA("ACGT");
+        assertEquals("", 0, DNA.compareByLength());
+        assertEquals("", 0, DNA.compareByLength());
+
+        /* compare DNA's with same length and different content */
+        dna1.string2DNA("AGTT");
+        dna2.string2DNA("ACGT");
+        assertEquals("", -1, DNA.compareByLength());
+        assertEquals("", 1, DNA.compareByLength());
+    }
+}

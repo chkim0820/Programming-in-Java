@@ -1,0 +1,27 @@
+public interface Employee {
+  
+  public abstract String getFirstName();
+  
+  public abstract String getLastName();
+  
+  public abstract String getNumber();
+  
+  public abstract double getAmountEarned();
+  
+  default int compareToByName(Employee e) {
+    if (this.getFirstName().equals(e.getFirstName()) 
+         && this.getLastName().equals(e.getLastName()))
+      return 0;
+    else
+      return (this.getFirstName().compareToIgnoreCase(e.getFirstName()));
+  }
+  
+  default int compareToByEarnings(Employee e) {
+    if (this.getAmountEarned() < e.getAmountEarned())
+      return -1;
+    else if(this.getAmountEarned() > e.getAmountEarned())
+      return 1;
+    else
+      return 0;
+    }
+}

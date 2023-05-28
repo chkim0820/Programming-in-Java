@@ -1,0 +1,29 @@
+Welcome to DrJava.  Working directory is C:\Users\chaeh\Desktop\Code\CSDS 132 Project 1
+> Account a = new Account("1", 100)
+> Account b = new Account("2", 100)
+> a
+Account@145d1514
+> b
+Account@78f962f7
+> a.getAccountNumber()
+"1"
+> b.getAccountNumber()
+"2"
+> a.getBalanceLimit()
+100
+> b.getBalanceLimit()
+100
+> a.getBalance()
+0.0
+> a.charge(30)
+> a.getBalance()
+30.0
+> a.credit(10.0)
+> a.getBalance()
+20.0
+> a.setBalanceLimit(200)
+> a.getBalanceLimit()
+200
+> b.getBalanceLimit()
+100
+> 

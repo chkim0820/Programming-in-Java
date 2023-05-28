@@ -1,0 +1,124 @@
+/* Chaehyeon Kim, StudentAccount class represents the financial accounts of a student*/
+
+public class StudentAccount extends Account {
+  
+  // a field that stores the name of the owner
+  private String name;
+  // a field that stores the address off the owner
+  private String address = null;
+  // a field that stores the associated library account
+  private LibraryAccount libraryAccount = null; 
+  // a field that stores the associated tuition account
+  private CreditAccount tuitionAccount = null;
+  // a field that stores the associated dining account
+  private CreditAccount diningAccount = null;
+  // a field that stores the refund amount
+  private double refund = 0.0;
+  
+  
+  /* a constructor for StudentAccount class */
+  public StudentAccount(String accountNumber, String name) {
+    super(accountNumber, 0);
+    this.name = name;
+  }
+  
+  
+  /* 1a) a method that sets name */
+  public void setName(String name) {
+    this.name = name;
+  }
+  
+  /* 1b) a method that returns name */
+  public String getName() {
+    return name;
+  }
+  
+  /* 1c) a method that sets address */
+  public void setAddress(String address) {
+    this.address = address;
+  }
+  
+  /* 1d) a method that returns address */
+  public String getAddress() {
+    return address;
+  }
+  
+  /* 1e) a method that sets associated library account */
+  public void setLibraryAccount(LibraryAccount libraryAccount) {
+    this.libraryAccount = libraryAccount;
+  }
+  
+  /* 1f) a method that returns an associated LibrarayAccount value */
+  public LibraryAccount getLibraryAccount() {
+    return libraryAccount;
+  }
+  
+  /* 1g) a method that sets associated TuitionAccount value */
+  public void setTuitionAccount(CreditAccount tuitionAccount) {
+    this.tuitionAccount = tuitionAccount;
+  }
+  
+  /* 1h) a method that returns an associated TuitionAccount value*/
+  public CreditAccount getTuitionAccount() {
+    return tuitionAccount;
+  }
+  
+  /* 1i) a method that sets associated DiningAccount value*/
+  public void setDiningAccount(CreditAccount diningAccount) {
+    this.diningAccount = diningAccount;
+  }
+  
+  /* 1j) a method that returns associated DiningAccount value*/
+  public CreditAccount getDiningAccount() {
+    return diningAccount;
+  }
+  
+  /* overriding getBalance method for StudentAccount class */
+  @Override
+  public double getBalance(){  
+    if (getLibraryAccount() != null && getTuitionAccount() != null && getDiningAccount() != null)
+      return (getLibraryAccount().getBalance() + getTuitionAccount().getBalance() 
+              + getDiningAccount().getBalance() - refund); 
+    else
+      return super.getBalance() - refund;
+  }
+  
+  /* overriding charge method for StudentAccount class */
+  @Override
+  public void charge(double value) { // value: represents amount changes balance & refund amt
+    value = value - refund;
+    if (value - refund > 0 && this.getTuitionAccount() != null)
+      getTuitionAccount().charge(value - refund);
+    else
+      refund = value - refund;
+  }
+  
+  /* overriding credit method for StudentAccount class */
+  @Override
+  public void credit(double value) { // value represents changing the balances
+    if (getTuitionAccount().getBalance() - value <= 0 && getTuitionAccount() != null) {{
+      getTuitionAccount().credit(getTuitionAccount().getBalance()); 
+      value = value - getTuitionAccount().getBalance(); 
+    }
+    if (getDiningAccount().getBalance() - value <= 0 && getDiningAccount() != null) {{
+      getDiningAccount().credit(getDiningAccount().getBalance()); 
+      value = value - getDiningAccount().getBalance(); 
+    }
+    if (getLibraryAccount().getBalance() - value <= 0 && getLibraryAccount() != null) {{
+      getLibraryAccount().credit(getLibraryAccount().getBalance()); 
+      value = value - getLibraryAccount().getBalance(); 
+    }
+    }
+    else if (getLibraryAccount() != null)
+      getLibraryAccount().credit(value);
+    }
+    else if (getDiningAccount() != null)
+      getDiningAccount().credit(value);
+    }
+    else if (getTuitionAccount() != null)
+      getTuitionAccount().credit(value);
+    else if (value > 0)
+      refund = refund + value;
+  }
+  
+}

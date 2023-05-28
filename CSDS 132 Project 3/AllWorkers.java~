@@ -1,0 +1,63 @@
+/* a class looking over all employees & supervisors */
+
+public abstract class AllWorkers {
+  
+  private String firstName;
+  private String lastName;
+  private String number;
+  private double bonus;
+  private Supervisor supervisor;
+  
+  public AllWorkers(String firstName, String lastName, String number) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.number = number;
+  }
+  
+  public String getFirstName() {
+    return firstName;
+  }
+  
+  public String getLastName() {
+    return lastName;
+  }
+  
+  public void setName(String firstName, String lastName) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
+  
+  public String getNumber() {
+    return number;
+  }
+  
+  public double getBonus() {
+    return bonus;
+  }
+  
+  public void setBonus(double bonus) {
+    this.bonus = bonus;
+  }
+  
+  public abstract double getAmountEarned();
+  
+  @Override
+  public boolean equals(Object worker) {
+    if (worker instanceof AllWorkers) {
+      AllWorkers e = (AllWorkers)worker;
+      return (this.getFirstName().equals(e.getFirstName()) 
+              && this.getLastName().equals(e.getLastName()) 
+              && this.getNumber().equals(e.getNumber()));
+    }
+    else
+      return false;
+  }
+    
+  public void setSupervisor(Supervisor supervisor) {
+    this.supervisor = supervisor;
+  }
+  
+  public Supervisor getSupervisor() {
+    return supervisor;
+  }
+}
